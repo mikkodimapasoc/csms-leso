@@ -3,15 +3,34 @@ import 'firebase/firestore';
 import 'firebase/auth';
 
 const config = {
-  apiKey: 'AIzaSyBqW-b8PMTln_Uy184JUOq6pPOcw4w3zVM',
-  authDomain: 'csms-leso.firebaseapp.com',
-  databaseURL: 'https://csms-leso.firebaseio.com',
-  projectId: 'csms-leso',
-  storageBucket: 'csms-leso.appspot.com',
-  messagingSenderId: '921034475198',
-  appId: '1:921034475198:web:dd566bbdf42b0e28'
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_DATABASE_URL,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID
 };
 
-firebase.initializeApp(config);
+class Firebase {
+  constructor() {
+    firebase.initializeApp(config);
+    this.auth = firebase.auth();
+    this.db = firebase.firestore;
+  }
 
-export const auth = firebase.auth();
+  loginUser = (email, password) => {
+    this.auth.signInWithEmailAndPassword(email, password);
+  };
+
+  logoutUser = () => {
+    this.auth.signOut();
+  };
+
+  passswordReset = email => this.auth.sendPasswordResetEmail(email);
+  changePassword = password => this.auth.currentUser.updatePassword(password);
+  registerUser = (email, password) =>
+    this.auth.createUserWithEmailAndPassword(email, password);
+}
+
+export default new Firebase();
