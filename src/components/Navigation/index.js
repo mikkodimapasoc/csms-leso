@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes';
+import { AuthUserContext } from '../Session';
 
 const Navigation = () => {
   return (
     <div>
-      <ul>
+      {/* <ul>
         <li>
           <Link to={ROUTES.LANDING}></Link>
         </li>
@@ -15,7 +16,11 @@ const Navigation = () => {
         <li>
           <Link to={ROUTES.PASSWORD_RESET}></Link>
         </li>
-      </ul>
+      </ul> */}
+
+      {/* <AuthUserContext.Consumer>
+        {authUser => (authUser ? <NavigationAuth /> : <NavigationNonAuth />)}
+      </AuthUserContext.Consumer> */}
     </div>
   );
 };
