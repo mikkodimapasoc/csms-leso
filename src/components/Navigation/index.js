@@ -6,21 +6,26 @@ import { AuthUserContext } from '../Session';
 const Navigation = () => {
   return (
     <div>
-      {/* <ul>
-        <li>
-          <Link to={ROUTES.LANDING}></Link>
-        </li>
-        <li>
-          <Link to={ROUTES.CREATE_USER}></Link>
-        </li>
-        <li>
-          <Link to={ROUTES.PASSWORD_RESET}></Link>
-        </li>
-      </ul> */}
+      <AuthUserContext.Consumer>
+        {/* double check if authUser is === leso or college. render Admin for LESO, then College for colleges */}
+        {authUser => (authUser ? <AdminNavigation /> : <CollegeNavigation />)}
+      </AuthUserContext.Consumer>
+    </div>
+  );
+};
 
-      {/* <AuthUserContext.Consumer>
-        {authUser => (authUser ? <NavigationAuth /> : <NavigationNonAuth />)}
-      </AuthUserContext.Consumer> */}
+const AdminNavigation = () => {
+  return (
+    <div>
+      <h1>Admin page</h1>
+    </div>
+  );
+};
+
+const CollegeNavigation = () => {
+  return (
+    <div>
+      <h1>College page</h1>
     </div>
   );
 };

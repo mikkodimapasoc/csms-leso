@@ -26,11 +26,32 @@ class Firebase {
   logoutUser = () => {
     this.auth.signOut();
   };
+  // // adds user to the user database
+  // createUserProfileDocument = async (userAuth, additionalData) => {
+  //   if (!userAuth) return;
+  //   const userRef = this.db.doc(`users/${userAuth.uid}`);
+  //   const snapShot = await userRef.get();
 
+  //   if (!snapShot.exists) {
+  //     const { email } = userAuth;
+  //     const createdAt = new Date();
+
+  //     try {
+  //       await userRef.set({
+  //         email,
+  //         createdAt,
+  //         ...additionalData
+  //       });
+  //     } catch (error) {
+  //       console.log('error creating user', error.message);
+  //     }
+  //   }
+  //   return userRef;
+  // };
   passswordReset = email => this.auth.sendPasswordResetEmail(email);
   changePassword = password => this.auth.currentUser.updatePassword(password);
   registerUser = (email, password) =>
     this.auth.createUserWithEmailAndPassword(email, password);
 }
 
-export default new Firebase();
+export default Firebase;
